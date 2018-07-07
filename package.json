@@ -1,0 +1,20 @@
+{
+  "name": "18-oauth",
+  "version": "1.0.0",
+  "description": "![cf](http://i.imgur.com/7v5ASc8.png) OAuth ===",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stariel/18-oauth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stariel/18-oauth/issues"
+  },
+  "homepage": "https://github.com/stariel/18-oauth#readme"
+}
