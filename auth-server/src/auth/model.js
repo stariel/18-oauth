@@ -24,26 +24,13 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.statics.createFromOAuth = function(incoming) {
-  /*
-    {
-      kind: 'plus#personOpenIdConnect',
-      sub: '100592365129823370453',
-      name: 'John Cokos',
-      given_name: 'John',
-      family_name: 'Cokos',
-      picture: 'https://lh4.googleusercontent.com/-qN0rHFTCPXY/AAAAAAAAAAI/AAAAAAAAAAw/lGUgjyX0vIc/photo.jpg?sz=50',
-      email: 'john@codefellows.com',
-      email_verified: 'true',
-      locale: 'en',
-      hd: 'codefellows.com'
-    }
-   */
 
-  if ( ! incoming || ! incoming.email ) {
-    return Promise.reject('VALIDATION ERROR: missing username/email or password ');
+
+  if ( ! incoming || ! incoming.edam_userId ) {
+    return Promise.reject('VALIDATION ERROR: missing userID or password ');
   }
 
-  return this.findOne({email:incoming.email})
+  return this.findOne({username:incoming.edam_userId})
     .then(user => {
       if ( ! user ) { throw new Error ('User Not Found'); }
       console.log('Welcome Back', user.username);
@@ -51,12 +38,12 @@ userSchema.statics.createFromOAuth = function(incoming) {
     })
     .catch( error => {
     // Create the user
-      let username = incoming.email;
-      let password = 'none';
+      let username = incoming.edam.userId;
+      let password = incoming.oauth_token;
       return this.create({
         username: username,
         password: password,
-        email: incoming.email,
+        email: incoming.edam_userId,
       });
     });
 
